@@ -1,3 +1,4 @@
+var serve = require('koa-static');
 var koa = require('koa');
 var app = koa();
 
@@ -12,8 +13,7 @@ app.use(function*(next) {
 
 // response
 
-app.use(function*() {
-    this.body = 'Hello World';
-});
+// public 
+app.use(serve('public'));
 
 app.listen(8080);
