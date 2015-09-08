@@ -5,7 +5,7 @@
     "watch"       : "true",
     "node_args"   : "--harmony",
     "env": {
-        "PORT": 3000,
+        "PORT": 8080,
         "DEBUG": "*"
     }
   }]
