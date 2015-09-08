@@ -1,5 +1,5 @@
 {
-  "app": 3000,
+  "app": 8080,
   "keys": ["blog"],
   "mongo": {
     "host": "localhost",
