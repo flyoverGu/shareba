@@ -165,7 +165,8 @@ exports.getOne = function (mongo, id) {
         if (!doc) {
           return cb(exception(exception.NotFound, 'NotFound ' + id));
         }
-        doc.content = marked(doc.content);
+        doc = doc.value;
+        doc.content = marked(doc.content || '');
         doc.time = moment(doc.time).format('YYYY-MM-DD HH:mm');
         doc.comments.forEach(function (comment) {
           comment.content = marked(comment.content);
