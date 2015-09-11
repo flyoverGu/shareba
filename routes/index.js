@@ -24,55 +24,55 @@ module.exports = function (app) {
     });
   }));
 
-  app.use(route.get('/reg', checkNotLogin));
-  app.use(route.get('/reg', function* () {
-    yield this.render('reg', {
-      title: '注册',
-      user: this.session.user,
-      flash: this.flash
-    });
-  }));
+  //app.use(route.get('/reg', checkNotLogin));
+  //app.use(route.get('/reg', function* () {
+  //  yield this.render('reg', {
+  //    title: '注册',
+  //    user: this.session.user,
+  //    flash: this.flash
+  //  });
+  //}));
 
-  app.use(route.post('/reg', checkNotLogin));
-  app.use(route.post('/reg', function* () {
-    var body = this.request.body;
-    var name = body.name;
-    var password = body.password;
-    var password_re = body['password-repeat'];
-    var email = body.email;
+  //app.use(route.post('/reg', checkNotLogin));
+  //app.use(route.post('/reg', function* () {
+  //  var body = this.request.body;
+  //  var name = body.name;
+  //  var password = body.password;
+  //  var password_re = body['password-repeat'];
+  //  var email = body.email;
 
-    if (password_re != password) {
-      throw exception(exception.RequestError, '两次输入的密码不一致!');
-    }
+  //  if (password_re != password) {
+  //    throw exception(exception.RequestError, '两次输入的密码不一致!');
+  //  }
 
-    var user = yield User.get(this.mongo, name);
-    if (user) {
-      throw exception(exception.RequestError, '用户已存在!');
-    }
+  //  var user = yield User.get(this.mongo, name);
+  //  if (user) {
+  //    throw exception(exception.RequestError, '用户已存在!');
+  //  }
 
-    var newUser = {
-        name: name,
-        password: md5(password),
-        email: email,
-        avatar: gravatar.url(email, {s: 48})
-    };
+  //  var newUser = {
+  //      name: name,
+  //      password: md5(password),
+  //      email: email,
+  //      avatar: gravatar.url(email, {s: 48})
+  //  };
 
-    yield User.save(this.mongo, newUser);
+  //  yield User.save(this.mongo, newUser);
 
-    delete newUser.password;
-    this.session.user = newUser;
-    this.flash = '注册成功!';
-    this.redirect('/');
-  }));
+  //  delete newUser.password;
+  //  this.session.user = newUser;
+  //  this.flash = '注册成功!';
+  //  this.redirect('/');
+  //}));
 
-  app.use(route.get('/login', checkNotLogin));
-  app.use(route.get('/login', function* () {
-    yield this.render('login', {
-      title: '注册',
-      user: this.session.user,
-      flash: this.flash
-    });
-  }));
+  //app.use(route.get('/login', checkNotLogin));
+  //app.use(route.get('/login', function* () {
+  //  yield this.render('login', {
+  //    title: '注册',
+  //    user: this.session.user,
+  //    flash: this.flash
+  //  });
+  //}));
 
   app.use(route.post('/login', checkNotLogin));
   app.use(route.post('/login', function* () {

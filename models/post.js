@@ -54,7 +54,8 @@ exports.getTen = function (mongo, name, page) {
           return cb(exception(exception.DBError, err.message));
         }
         docs.forEach(function (doc) {
-          doc.content = marked(doc.content);
+          doc.content = marked(doc.content) || "";
+          doc.content = doc.content.slice(0, 50) + "....";
           doc.time = moment(doc.time).format('YYYY-MM-DD HH:mm');
           doc.comments.forEach(function (comment) {
             comment.time = moment(comment.time).format('YYYY-MM-DD HH:mm');
