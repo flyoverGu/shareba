@@ -199,24 +199,24 @@ module.exports = function (app) {
     });
   }));
 
-  app.use(route.post('/p/:id', checkLogin));
-  app.use(route.post('/p/:id', function* (id) {
-    var body = this.request.body;
+  //app.use(route.post('/p/:id', checkLogin));
+  //app.use(route.post('/p/:id', function* (id) {
+  //  var body = this.request.body;
 
-    var newComment = {
-      name: body.name,
-      avatar: gravatar.url(body.email, {s: 48}),
-      email: body.email,
-      website: body.website,
-      time: Date.now(),
-      content: body.content
-    };
+  //  var newComment = {
+  //    name: body.name,
+  //    avatar: gravatar.url(body.email, {s: 48}),
+  //    email: body.email,
+  //    website: body.website,
+  //    time: Date.now(),
+  //    content: body.content
+  //  };
 
-    yield Post.postOne(this.mongo, id, newComment);
+  //  yield Post.postOne(this.mongo, id, newComment);
 
-    this.flash = '留言成功!';
-    this.redirect('back');
-  }));
+  //  this.flash = '留言成功!';
+  //  this.redirect('back');
+  //}));
 
   app.use(route.get('/edit/:id/', checkLogin));
   app.use(route.get('/edit/:id/', function* (id, next) {
