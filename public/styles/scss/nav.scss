@@ -1,0 +1,29 @@
+nav {
+    margin: 20px 0;
+    height: 40px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    background: #f4f4f4;
+
+    ul > li {
+        display: inline-block;
+        margin-left: 20px;
+        line-height: 40px;
+        height: 40px;
+        
+        &.active,
+        &:hover {
+            background: #3da9f7;
+        }
+    }
+
+    .left-nav {
+        display: inline-block;
+        float: left;
+    }
+
+
+    .right-nav {
+        float: right;
+    }
+}
