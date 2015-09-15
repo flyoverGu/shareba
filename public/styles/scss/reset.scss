@@ -1,4 +1,4 @@
-
+g
 // Reset
 html, body, div, span, object, i,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -85,4 +85,9 @@ body {
 a {
     color: #333333;
     text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
 }

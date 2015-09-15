@@ -4,6 +4,7 @@
     .article-item {
         height: 120px;
         padding: 20px;
+        overflow: hidden;
         margin-bottom: 20px;
         background: #fff;
         box-shadow: 0 0px 8px rgba(46,143,237,0.3);
@@ -23,5 +24,8 @@
     .brief {
         font-size: 13px;
         color: #666;
+        height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
