@@ -94,8 +94,7 @@ module.exports = function (app) {
   app.use(route.get('/tags/:tag', function* (tag) {
     var posts = yield Post.getTag(this.mongo, tag);
 
-    yield this.render('tag', {
-      title: 'TAG:' + tag,
+    yield this.render('index', {
       posts: posts,
       user: this.session.user,
       flash: this.flash
