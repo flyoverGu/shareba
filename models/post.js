@@ -122,6 +122,8 @@ exports.getTag = function(mongo, tag) {
                 "tags": tag
             }, {
                 "title": 1,
+                "content": 1,
+                "tags": 1,
                 "time": 1
             })
             .toArray(function(err, docs) {
@@ -317,10 +319,9 @@ var handlePosts = function(err, posts, cb) {
         return cb(exception(exception.DBError, err.message));
     }
     var ps = posts || [];
-    ps.forEach(function(p) {
+    ps.map(function(p) {
         p.content = marked(p.content) || '';
         p.time = moment(p.time).format('YYYY-MM-DD HH:mm');
-        p.
     });
     cb(null, ps);
 }

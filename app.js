@@ -22,12 +22,12 @@ render(app, {
   viewExt: 'ejs'
 });
 
-app.use(logger());
 app.use(bodyparser());
 app.use(session(app));
 app.use(flash());
 app.use(mongo(config.mongo));
 app.use(serve(__dirname + '/public'));
+app.use(logger());
 
 app.use(function* (next) {
   try {
