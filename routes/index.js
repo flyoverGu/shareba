@@ -2,10 +2,12 @@ var gravatar = require('gravatar');
 var moment = require('moment');
 var route = require('koa-route');
 
-var User = require('../models/user');
-var Post = require('../models/post');
+var User = require('../dao/user');
+var Post = require('../dao/post');
 var exception = require('../lib/exception');
 var md5 = require('../lib/md5');
+
+var user = require('./user');
 
 module.exports = function(app) {
     app.use(route.get('/', function*() {
@@ -26,27 +28,8 @@ module.exports = function(app) {
         });
     }));
 
-    app.use(route.post('/login', checkNotLogin));
-    app.use(route.post('/login', function*() {
-        var name = this.request.body.name;
-        var password = this.request.body.password;
-
-        var user =
-            yield User.get(this.mongo, name);
-
-        if (!user) {
-            throw exception(exception.RequestError, '用户不存在!');
-        }
-
-        if (user.password != md5(password)) {
-            throw exception(exception.RequestError, '密码错误!');
-        }
-
-        delete user.password;
-        this.session.user = user;
-        this.flash = '登录成功!';
-        this.redirect('/');
-    }));
+    app.use(route.post('/reg', user.reg));
+    app.use(route.post('/login', user.login));
 
     app.use(route.get('/post', checkLogin));
     app.use(route.get('/post', function*() {
