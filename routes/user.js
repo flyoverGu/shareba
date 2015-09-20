@@ -17,8 +17,8 @@ module.exports = {
         this.response.body = "reg success";
     },
 
-    login: function* () {
-           
+    login: function*() {
+
         var body = this.request.body;
         var name = body.name;
         var password = body.password;
@@ -38,5 +38,12 @@ module.exports = {
         this.session.user = user;
         this.flash = '登录成功!';
         this.redirect('/');
+    },
+
+    logout: function*() {
+        this.session.user = null;
+        this.flash = '登出成功!';
+        this.redirect('/');
     }
+
 }

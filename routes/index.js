@@ -30,6 +30,8 @@ module.exports = function(app) {
 
     app.use(route.post('/reg', user.reg));
     app.use(route.post('/login', user.login));
+    app.use(route.get('/logout', checkLogin));
+    app.use(route.get('/logout', user.logout));
 
     app.use(route.get('/post', checkLogin));
     app.use(route.get('/post', function*() {
@@ -45,13 +47,6 @@ module.exports = function(app) {
         yield Post.save(this.mongo, this.session.user, this.request.body);
 
         this.flash = '发布成功!';
-        this.redirect('/');
-    }));
-
-    app.use(route.get('/logout', checkLogin));
-    app.use(route.get('/logout', function*() {
-        this.session.user = null;
-        this.flash = '登出成功!';
         this.redirect('/');
     }));
 
