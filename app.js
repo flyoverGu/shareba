@@ -13,6 +13,8 @@ var route = require('./routes/');
 var config = require('./config.json');
 var exception = require('./lib/exception');
 
+var spider = require('./spider');
+
 var app = koa();
 app.keys = config.keys;
 

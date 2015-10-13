@@ -8,29 +8,33 @@ let baseUrl = 'http://www.weixinyidu.com'; // 毒舌电影
 
 let getMovieList = () => {
     let url = baseUrl + '/a_2851'; 
-    http.get(url).end((err, res) => {
-        if (err) {
-            console.log('get movie list error :' + err);
-        } else {
-            let html = res.text;
-            let {title, href} = findNewMovie(html);
-            console.log(title);
-            getMovieContent(href);
-        }
-    });
+    return (cb) => {
+        http.get(url).end((err, res) => {
+            if (err) {
+                console.log('get movie list error :' + err);
+                cb(err);
+            } else {
+                let html = res.text;
+                cb(null, findNewMovie(html));
+            }
+        });
+    }
 }
 
 let getMovieContent = (href) => {
     let url = baseUrl + href;
-    http.get(url).end((err, res) => {
-        if (err) {
-            console.log('get movie content error :' + err);
-        } else {
-            let html = res.text;
-            let content = readMovieContent(html);
-            console.log(content);
-        }
-    });
+    return (cb) => {
+        http.get(url).end((err, res) => {
+            if (err) {
+                console.log('get movie content error :' + err);
+                cb(err);
+            } else {
+                let html = res.text;
+                let content = readMovieContent(html);
+                cb(null, content);
+            }
+        });
+    }
 }
 
 let findNewMovie = (html) => {
@@ -43,9 +47,16 @@ let findNewMovie = (html) => {
 
 let readMovieContent = (html) => {
     let $el = $.load(html, {decodeEntities: false});
-    let content = $el('#page-content').children().html();
+    let content = $el('#page-content').html();
     content = htmlToText.fromString(content);
-    return content;
+    return transformUrl(content);
 }
 
-getMovieList();
+let transformUrl = (content) => content.replace(/\[(\S*)\]/gi, (str, $1) => '![](' + $1 + ')');
+
+module.exports = function *() {
+    let {title, href}  = yield getMovieList();
+    let content = yield getMovieContent(href);   
+    return {title, content};
+}
+
