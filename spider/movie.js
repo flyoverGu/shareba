@@ -42,7 +42,8 @@ let findNewMovie = (html) => {
     let li = $el('.news_list .news_content li');
     let title = li.find('.news_title').html();
     let href = li.find('a').attr('href');
-    return {title, href}
+    let img = li.find('.news_img img').attr('src');
+    return {title, href, img}
 }
 
 let readMovieContent = (html) => {
@@ -55,8 +56,8 @@ let readMovieContent = (html) => {
 let transformUrl = (content) => content.replace(/\[(\S*)\]/gi, (str, $1) => '![](' + $1 + ')');
 
 module.exports = function *() {
-    let {title, href}  = yield getMovieList();
+    let {title, href, img}  = yield getMovieList();
     let content = yield getMovieContent(href);   
-    return {title, content};
+    return {title, content, img};
 }
 

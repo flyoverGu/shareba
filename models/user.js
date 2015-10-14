@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 
 var defaultUser = {
-    name: '',
+    name: 'flyover',
     avatar: '',
     email: '',
     password: ''   

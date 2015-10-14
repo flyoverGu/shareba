@@ -4,12 +4,14 @@ var Post = require('../dao/post');
 var config = require('../config.json');
 var mongo = require('koa-mongo');
 
+var conf = {}
+Object.assign(conf, config.mongo, {fuckMongo: true});
 
-co(mongo(config.mongo)).then(function() {
-    console.log(11);
-    console.log(this);
-});
+co(function* () {
+    let m = yield mongo(conf);
+    let data = yield movie();
 
-//co(movie).then(function(movie) {
-//    console.log(movie);
-//})
+    yield Post.save(m, {id: 'admin'}, data);
+}).catch(function(err) {
+    console.log(err);
+})
