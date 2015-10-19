@@ -111,10 +111,7 @@ exports.getTag = function(mongo, tag) {
 exports.search = function(mongo, keyword) {
     var pattern = new RegExp(keyword, "i");
     return function(cb) {
-        mongo
-            .db('blog')
-            .collection('posts')
-            .find({
+        getMongo(mongo).find({
                 "title": pattern
             }, {
                 "time": 1,

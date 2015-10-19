@@ -4,14 +4,17 @@ var Post = require('../dao/post');
 var config = require('../config.json');
 var mongo = require('koa-mongo');
 
-var conf = {}
-Object.assign(conf, config.mongo, {fuckMongo: true});
-
 co(function* () {
-    let m = yield mongo(conf);
+    yield mongo(config)(function *() {
+        console.log(this);
+    });
     let data = yield movie();
+    let res = yield Post.search(m, data.title);
+    if (res && res.length) {
+    } else {
+        yield Post.save(m, {id: 'admin'}, data);
+    }
 
-    yield Post.save(m, {id: 'admin'}, data);
 }).catch(function(err) {
     console.log(err);
 })
