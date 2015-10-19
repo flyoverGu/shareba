@@ -24,10 +24,7 @@ exports.getTen = function(mongo, name, page) {
         query.name = name;
     }
     return function(cb) {
-        mongo
-            .db('blog')
-            .collection('posts')
-            .find(query)
+        getMongo(mongo).find(query)
             .sort({
                 time: -1
             })
@@ -45,15 +42,12 @@ exports.count = function(mongo, name) {
         query.name = name;
     }
     return function(cb) {
-        mongo
-            .db('blog')
-            .collection('posts')
-            .count(query, function(err, res) {
-                if (err) {
-                    return cb(exception(exception.DBError, err.message));
-                }
-                cb(null, res);
-            });
+        getMongo(mongo).count(query, function(err, res) {
+            if (err) {
+                return cb(exception(exception.DBError, err.message));
+            }
+            cb(null, res);
+        });
     };
 };
 
@@ -140,20 +134,17 @@ exports.search = function(mongo, keyword) {
 
 exports.getOne = function(mongo, id) {
     return function(cb) {
-        mongo
-            .db('blog')
-            .collection('posts')
-            .findAndModify({
-                "_id": new ObjectID(id)
-            }, [], {
-                "$inc": {
-                    pv: 1
-                }
-            }, {
-                new: true
-            }, function(err, doc) {
-                handlePost(err, doc, cb, id);
-            });
+        getMongo(mongo).findAndModify({
+            "_id": new ObjectID(id)
+        }, [], {
+            "$inc": {
+                pv: 1
+            }
+        }, {
+            new: true
+        }, function(err, doc) {
+            handlePost(err, doc, cb, id);
+        });
     };
 };
 
