@@ -1,8 +1,9 @@
 {
   "apps" : [{
-    "name"        : "N-blog",
+    "name"        : "shareba",
     "script"      : "app.js",
     "watch"       : "true",
+    "exec_interpreter": "babel-node",
     "node_args"   : "--harmony",
     "env": {
         "PORT": 8080,
