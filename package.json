@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "generic-pool": "^2.2.0",
     "gravatar": "^1.3.0",
     "gulp": "^3.9.0",
     "gulp-sass": "^2.0.4",
