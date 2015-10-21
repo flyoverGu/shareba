@@ -21,6 +21,10 @@ let start = () => {
         let res =
             yield Post.search(m, data.title);
 
+        Object.assign(data, {
+            tags: ['movie']
+        });
+
         console.log(res);
         // 避免重复查询
         if (res && res.length) {} else {

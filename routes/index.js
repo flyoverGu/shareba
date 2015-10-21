@@ -2,31 +2,14 @@ var gravatar = require('gravatar');
 var moment = require('moment');
 var route = require('koa-route');
 
-var User = require('../dao/user');
-var Post = require('../dao/post');
 var exception = require('../lib/exception');
 var md5 = require('../lib/md5');
 
 var user = require('./user');
+var post = require('./post');
 
 module.exports = function(app) {
-    app.use(route.get('/', function*() {
-        var page = this.query.p ? parseInt(this.query.p) : 1;
-        var posts =
-            yield Post.getTen(this.mongo, null, page);
-        var total =
-            yield Post.count(this.mongo);
-
-        yield this.render('index', {
-            title: '主页',
-            posts: posts,
-            page: page,
-            user: this.session.user,
-            isFirstPage: (page - 1) === 0,
-            isLastPage: ((page - 1) * 10 + posts.length) === total,
-            flash: this.flash
-        });
-    }));
+    app.use(route.get('/', post.pagePosts));
 
     app.use(route.post('/reg', user.reg));
     app.use(route.post('/login', user.login));
@@ -43,36 +26,6 @@ module.exports = function(app) {
     }));
 
     app.use(route.post('/post', checkLogin));
-    app.use(route.post('/post', function*() {
-        yield Post.save(this.mongo, this.session.user, this.request.body);
-
-        this.flash = '发布成功!';
-        this.redirect('/');
-    }));
-
-    app.use(route.get('/archive', function*() {
-        var posts =
-            yield Post.getArchive(this.mongo);
-
-        yield this.render('archive', {
-            title: '存档',
-            posts: posts,
-            user: this.session.user,
-            flash: this.flash
-        });
-    }));
-
-    app.use(route.get('/tags', function*() {
-        var posts =
-            yield Post.getTags(this.mongo);
-    
-        yield this.render('tags', {
-            title: '标签',
-            posts: posts,
-            user: this.session.user,
-            flash: this.flash
-        });
-    }));
 
     app.use(route.get('/tags/:tag', function*(tag) {
         var posts =
@@ -80,14 +33,6 @@ module.exports = function(app) {
 
         yield this.render('index', {
             posts: posts,
-            user: this.session.user,
-            flash: this.flash
-        });
-    }));
-
-    app.use(route.get('/links', function*() {
-        yield this.render('links', {
-            title: '友情链接',
             user: this.session.user,
             flash: this.flash
         });
@@ -134,47 +79,6 @@ module.exports = function(app) {
             user: this.session.user,
             flash: this.flash
         });
-    }));
-
-    app.use(route.get('/edit/:id/', checkLogin));
-    app.use(route.get('/edit/:id/', function*(id, next) {
-        var currentUser = this.session.user;
-        var post =
-            yield Post.getEdit(this.mongo, id, currentUser.name);
-
-        yield this.render('edit', {
-            title: '编辑',
-            post: post,
-            user: this.session.user,
-            flash: this.flash
-        });
-    }));
-
-    app.use(route.post('/edit/:id', checkLogin));
-    app.use(route.post('/edit/:id', function*(id) {
-        var currentUser = this.session.user;
-        yield Post.postEdit(this.mongo, id, currentUser.name, this.request.body);
-
-        this.flash = '修改成功!';
-        this.redirect('/p/' + id);
-    }));
-
-    app.use(route.get('/delete/:id', checkLogin));
-    app.use(route.get('/delete/:id', function*(id) {
-        var currentUser = this.session.user;
-        yield Post.getDelete(this.mongo, id, currentUser.name);
-
-        this.flash = '删除成功!';
-        this.redirect('/');
-    }));
-
-    app.use(route.get('/reprint/:id', checkLogin));
-    app.use(route.get('/reprint/:id', function*(id) {
-        var currentUser = this.session.user;
-        yield Post.getReprint(this.mongo, id, currentUser);
-
-        this.flash = '转载成功!';
-        this.redirect('/');
     }));
 
     app.use(function*() {

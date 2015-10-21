@@ -1,3 +1,5 @@
+var Post = require('../dao/post');
+
 module.exports = {
     pagePosts: function* () {
         var page = this.query.p ? parseInt(this.query.p) : 1;

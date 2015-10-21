@@ -91,10 +91,7 @@ exports.getTags = function(mongo) {
 
 exports.getTag = function(mongo, tag) {
     return function(cb) {
-        mongo
-            .db('blog')
-            .collection('posts')
-            .find({
+        getMongo(mongo).find({
                 "tags": tag
             }, {
                 "title": 1,
