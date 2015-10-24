@@ -26,7 +26,7 @@
           if (data.messages[i].msgType <= 2) {
             //代表用户发消息过来.图片，和文字
             messages.push({
-              message: data.messages[i].msgContent[0][1],
+              msg: data.messages[i].msgContent[0][1],
               time: data.messages[i].msgSendTime * 1000,
               id: data.messages[i].fromId
             });
