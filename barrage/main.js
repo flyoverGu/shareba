@@ -36,7 +36,9 @@
         }
 
         console.log(messages);
-        BarragesWillSent.concat(messages);
+        messages.map(function(m) {
+            BarragesWillSent.concat(m);
+        });
       });
 
       sdk.Base.startListenAllMsg();
