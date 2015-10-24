@@ -26,6 +26,7 @@ app.use(route.get(api + "wechat/verify", function*() {
     }
 }));
 
+let token = "54edc0f2e451765ea087f9fa";
 let verifyWechat = (signature, timestamp, nonce) => {
     if (!signature || !timestamp || !nonce) {
         return false;
