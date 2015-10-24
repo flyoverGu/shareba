@@ -1,0 +1,13 @@
+{
+	"name": "弹幕飞飞飞",
+	"version":	"0.0.1",
+	"manifest_version":	2,
+	"description":	"弹幕飞飞飞",
+	"content_security_policy": 	"script-src 'self'; object-src 'self'",
+	"content_scripts":  [{
+						"matches": 	["*://*/*"],
+						"run_at": 	"document_end",
+						"js": 		["index.js"]
+					}],
+	"permissions":	["http://*/*"] 
+}
