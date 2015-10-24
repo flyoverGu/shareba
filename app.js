@@ -6,7 +6,7 @@ let xml = require("co-wechat-parser").middleware;
 
 let app = koa();
 app.use(bodyparser());
-app.use(xml());
+//app.use(xml());
 
 
 app.use(function*(next) {
@@ -35,7 +35,7 @@ app.use(route.post(api + 'wechat/verify', function*() {
     } = this.query;
     console.log(this.request.body);
     if (verifyWechat(signature, timestamp, nonce)) {
-
+        
     } else {
         this.body = "1111";
     }
