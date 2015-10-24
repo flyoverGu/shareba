@@ -82,7 +82,8 @@ let emitMsg = (msg) => {
         uid: msg.tousername,
         msg: msg.content,
         msgTime: msg.createtime,
-        msgTpye: msg.msgtype
+        msgTpye: msg.msgtype,
+        id: msg.msgid
     };
     io.emit('msg', content);
 }

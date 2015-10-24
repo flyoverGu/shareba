@@ -36,11 +36,15 @@
         var socket = io('http://' + location.host + ':8081');
         socket.on('msg', function (data) {
             BarragesWillSent.push({
-                "id": data.uid,
+                "id": data.id,
                 "msg": data.msg,
                 "time": data.msgTime
             });
         });
     </script>
+    <!-- WSDK-->
+    <script src="https://g.alicdn.com/aliww/h5.openim.sdk/0.1.8/scripts/wsdk.js"></script>
+    <!--你的js-->
+    <script src="./barrage/main.js"></script>
 </body>
 </html>
