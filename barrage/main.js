@@ -37,7 +37,7 @@
 
         console.log(messages);
         messages.map(function(m) {
-            BarragesWillSent.concat(m);
+            BarragesWillSent.push(m);
         });
       });
 
