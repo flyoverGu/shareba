@@ -1,2 +1,0 @@
-# shareba
-for share

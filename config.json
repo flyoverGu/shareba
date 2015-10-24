@@ -1,9 +1,0 @@
-{
-  "app": 8080,
-  "keys": ["blog"],
-  "mongo": {
-    "host": "localhost",
-    "port": 27017,
-    "db": "share"
-  }
-}
