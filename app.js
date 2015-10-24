@@ -4,9 +4,11 @@ let route = require('koa-route');
 let sha1 = require('sha1');
 let wechatparser = require("co-wechat-parser").middleware;
 let xml = require('xml');
+let serve = require('koa-static');
 
 let app = koa();
 
+app.use(serve('.'));
 app.use(function*(next) {
     try {
         yield next;
@@ -36,11 +38,8 @@ app.use(route.post(api + 'wechat/verify', function*() {
     } = this.query;
     console.log(this.request.body);
     this.set('Content-Type', 'text/xml');
-    if (verifyWechat(signature, timestamp, nonce)) {
-    } else {
-        this.body = "";
-    }
     this.body = initReplyMessage(this.request.body);
+    emitMsg(this.request.body);
 }));
 
 let initReplyMessage = (m) => {
@@ -73,3 +72,19 @@ let verifyWechat = (signature, timestamp, nonce) => {
 
 let port = 8080;
 app.listen(port, () => console.log("start !!!"));
+
+// socket
+let server = require('http').Server(app.callback());
+let io = require('socket.io')(server);
+
+let emitMsg = (msg) => {
+    io.emit('msg', msg);
+}
+
+io.on('connection', (socket) => {
+    console.log('connection success');
+    socket.on('disconnect', () => console.log("disconnect"));
+});
+
+server.listen(8081);
+
