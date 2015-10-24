@@ -5,9 +5,6 @@ let sha1 = require('sha1');
 let xml = require("co-wechat-parser").middleware;
 
 let app = koa();
-app.use(bodyparser());
-//app.use(xml());
-
 
 app.use(function*(next) {
     try {
@@ -16,6 +13,9 @@ app.use(function*(next) {
         console.log(e);
     }
 });
+app.use(xml());
+app.use(bodyparser());
+
 
 let api = "/api/v1/";
 app.use(route.get(api + "wechat/verify", function*() {
