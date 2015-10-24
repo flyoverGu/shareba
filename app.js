@@ -18,13 +18,22 @@ app.use(function*(next) {
 let api = "/api/v1/";
 app.use(route.get(api + "wechat/verify", function*() {
     let {signature, timestamp, nonce, echostr} = this.query;
-    console.log(this.query);
     if (verifyWechat(signature, timestamp, nonce)) {
         this.body = echostr; 
     } else {
         this.body = "fail";
     }
 }));
+
+app.use(route.post(api + 'wechat/verify', function*() {
+    let {signature, timestamp, nonce, echostr} = this.query;
+    console.log(this.body);
+    if (verifyWechat(signature, timestamp, nonce)) {
+
+    } else {
+
+    }
+});
 
 let token = "54edc0f2e451765ea087f9fa";
 let verifyWechat = (signature, timestamp, nonce) => {
