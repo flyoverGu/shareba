@@ -78,7 +78,12 @@ let server = require('http').Server(app.callback());
 let io = require('socket.io')(server);
 
 let emitMsg = (msg) => {
-    let contect = {uid: msg.tousername, msg: msg.content, msgTime: msg.createtime, msgTpye: msg.msgtype};
+    let content = {
+        uid: msg.tousername,
+        msg: msg.content,
+        msgTime: msg.createtime,
+        msgTpye: msg.msgtype
+    };
     io.emit('msg', content);
 }
 
@@ -88,4 +93,3 @@ io.on('connection', (socket) => {
 });
 
 server.listen(8081);
-
