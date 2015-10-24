@@ -86,7 +86,7 @@
 
             prevBarrage = current;
             handleBarrage(); //执行下次弹幕发送
-        }, current.time - prevBarrage.time);
+        }, 0);
 
 
     }
