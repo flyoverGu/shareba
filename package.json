@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "co-body": "^4.0.0",
+    "co-wechat-parser": "^0.1.6",
     "copy-to": "^2.0.1",
     "koa": "^1.1.1",
     "koa-bodyparser": "^2.0.1",
