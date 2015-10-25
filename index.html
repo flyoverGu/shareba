@@ -23,10 +23,19 @@
             line-height: 1em;
             height: 1em;
             white-space: nowrap;
-            transition-property: color;
+            transition-property: color, font-size;
             transition-duration: 2s;
             text-shadow: 1px 1px 3px #666;
+            transform: translateY(0);
             color: #fff;
+        }
+        @keyframes shake {
+            50% {
+                transform: translateY(4px)
+            }
+            100% {
+                transform: translateY(0)
+            }
         }
     </style>
 </head>

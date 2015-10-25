@@ -129,18 +129,38 @@
 
     function updateBarrage(barrage){
         //特殊弹幕处理
-        var tar;
-        if(barrage.msg == 'fast'){
-            tar = document.getElementById(barrage.parentId);
-            if(tar){
-                if(barrage.speed == 1){
-                    tar.style.color = '#fff';
-                    tar.style.zIndex = 0;
-                } else {
-                    tar.style.color = '#f00';
-                    tar.style.zIndex = (zIndex++);
-                }
-                tar.setAttribute('data-speed', barrage.speed);
+        if(!barrage.type) return false;
+
+        var tar = document.getElementById(barrage.parentId);
+
+        if(!tar) return false;
+
+        if(barrage.type == 'blow'){
+            if(barrage.value > 0){
+
+                tar.style.color = '#f00';
+                tar.style.zIndex = (zIndex++);
+                tar.setAttribute('data-speed', (1.1-barrage.value).toString());
+            } else {
+                tar.style.color = '#fff';
+                tar.style.zIndex = 0;
+                tar.setAttribute('data-speed', '1');
+            }
+
+            return true;
+        }
+        if(barrage.type == 'shake'){
+            if(barrage.value > 0){
+
+                tar.style.color = '#f00';
+                tar.style.zIndex = (zIndex++);
+                //tar.style.fontSize = fontSize*(1+barrage.value) + 'px';
+                tar.style.animation = 'shake '+ (1.1-barrage.value) +'s infinite'
+            } else {
+                tar.style.color = '#fff';
+                tar.style.zIndex = 0;
+                //tar.style.fontSize = fontSize + 'px';
+                tar.style.animation = 'none'
             }
             return true;
         }

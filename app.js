@@ -38,8 +38,10 @@ app.use(route.post(api + 'wechat/verify', function*() {
     } = this.query;
     console.log(this.request.body);
     this.set('Content-Type', 'text/xml');
-    this.body = initReplyMessage(this.request.body);
-    emitMsg(this.request.body);
+    if (this.request.body.event == 'text') {
+        this.body = initReplyMessage(this.request.body);
+        emitMsg(this.request.body);
+    }
 }));
 
 let initReplyMessage = (m) => {

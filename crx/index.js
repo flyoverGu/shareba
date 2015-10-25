@@ -29,11 +29,11 @@
     });
     $(hwDiv).css({
         position: 'absolute',
-        height: '20px',
-        width: '20px',
+        height: '8px',
+        width: '8px',
         bottom: 0,
         right: 0,
-        'background-color': 'red'
+        'background-color': '#000'
     });
 
     listenEvent(warp);
