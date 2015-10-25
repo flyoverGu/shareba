@@ -15,7 +15,7 @@
         uid: uid,
         appkey: appKey,
         credential: credential,
-        timeout: 4000,
+        timeout: 40000,
         success: function(data) {
             // {code: 1000, resultText: 'SUCCESS'}
             console.log('login success', data);
