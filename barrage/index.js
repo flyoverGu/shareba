@@ -13,7 +13,7 @@
         maskId = '_my_barrage_mask_';
 
     var zIndex = 1,
-        fontSize = 24,
+        fontSize = 48,
         barrageLines = 10;
 
     var getStyle = window.getComputedStyle;
