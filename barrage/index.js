@@ -76,7 +76,7 @@
         if(!current) {
             window.setTimeout(function(){
                 handleBarrage();
-            }, 200);
+            });
             return;
             //get barrage;
         }
