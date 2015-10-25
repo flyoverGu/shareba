@@ -159,11 +159,13 @@
                 tar.style.color = '#f00';
                 tar.style.zIndex = (zIndex++);
                 //tar.style.fontSize = fontSize*(1+barrage.value) + 'px';
+                tar.style.webkitAnimation = 'shake '+ (1.1-barrage.value) +'s infinite'
                 tar.style.animation = 'shake '+ (1.1-barrage.value) +'s infinite'
             } else {
                 tar.style.color = '#fff';
                 tar.style.zIndex = 0;
                 //tar.style.fontSize = fontSize + 'px';
+                tar.style.webkitAnimation = 'none'
                 tar.style.animation = 'none'
             }
             return true;
