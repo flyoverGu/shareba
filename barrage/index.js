@@ -104,6 +104,10 @@
 
         if(updateBarrage(barrage)) return true;
 
+        if (typeof barrage.msg != "string" || barrage.msg === '') {
+            return 
+        }
+
         //发送弹幕
         var textDom = document.createElement('span');
 
