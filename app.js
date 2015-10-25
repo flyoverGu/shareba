@@ -38,7 +38,7 @@ app.use(route.post(api + 'wechat/verify', function*() {
     } = this.query;
     console.log(this.request.body);
     this.set('Content-Type', 'text/xml');
-    if (this.request.body.event == 'text') {
+    if (this.request.body.msgtype == 'text') {
         this.body = initReplyMessage(this.request.body);
         emitMsg(this.request.body);
     }
