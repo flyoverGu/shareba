@@ -152,8 +152,8 @@ window.requestAnimFrame = (function() {
     //}, false);
 })();
 
-(function loop() {
+function loop() {
     "use strict";
     draw();
     requestAnimFrame(loop);
-})();
+};
