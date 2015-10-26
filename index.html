@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <title>barrage</title>
     <style>
+        .cool {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+        canvas {
+            position: relative;
+            top: 30%;
+            margin: 0 auto;
+            display: block;
+        }
         body {
             padding: 0;
             margin: 0;
+            background: #18181c;
+            color: white;
         }
         #_my_barrage_mask_ {
             position: fixed;
@@ -48,9 +61,14 @@
     </style>
 </head>
 <body>
+    
+    <div class="cool">
+        <canvas></canvas>
+    </div>
 
     <script type="text/javascript" src="http://cdn.socket.io/socket.io-1.3.0.js"></script>
     <script src="./barrage/index.js"></script>
+    <script src="./barrage/t.js"></script>
     <script>
         var socket = io('http://' + location.host + ':8081');
         socket.on('msg', function (data) {
