@@ -1,5 +1,4 @@
 var path = require('path');
-
 var koa = require('koa');
 var logger = require('koa-logger');
 var mongo = require('koa-mongo');
