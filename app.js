@@ -1,18 +1,19 @@
 var path = require('path');
 var koa = require('koa');
 var logger = require('koa-logger');
-var mongo = require('koa-mongo');
+//var mongo = require('koa-mongo');
 var session = require('koa-session');
 var flash = require('koa-flash');
 var bodyparser = require('koa-bodyparser');
 var render = require('koa-ejs');
 var serve = require('koa-static');
 
-var route = require('./routes/');
+//var route = require('./routes/');
+var route = require('koa-route');
 var config = require('./config.json');
 var exception = require('./lib/exception');
 
-var spider = require('./spider');
+//var spider = require('./spider');
 
 var app = koa();
 app.keys = config.keys;
@@ -27,7 +28,7 @@ app.use(logger());
 app.use(bodyparser());
 app.use(session(app));
 app.use(flash());
-app.use(mongo(config.mongo));
+//app.use(mongo(config.mongo));
 app.use(serve(__dirname + '/public'));
 
 app.use(function* (next) {
@@ -54,7 +55,10 @@ app.use(function* (next) {
   }
 });
 
-route(app);
+//route(app);
+app.use(route.get('/', function*(next) {
+    this.redirect('/views/index.html');
+}));
 
 var port = process.env.PORT || config.app;
 app.listen(port, function() {
