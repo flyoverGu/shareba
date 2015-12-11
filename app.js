@@ -57,7 +57,7 @@ app.use(function* (next) {
 
 //route(app);
 app.use(route.get('/', function*(next) {
-    this.redirect('/views/index.html');
+    this.redirect('/index.html');
 }));
 
 var port = process.env.PORT || config.app;
