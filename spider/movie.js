@@ -22,13 +22,15 @@ let parseDoubanMovie = (html) => {
     return res
 }
 
-let start = (list, ser) => {
+let start = (list, ser, cb) => {
     co(function*() {
         return yield list.map((item) => ser(item.url, item.parse));
-    }).then((val) => console.log(val), (err) => console.log(err.stack));
+    }).then((val) => cb(null, val), (err) => cb(err));
 }
 
-start([{
+let thinkF = (list, ser) => (cb) => start(list, ser, cb);
+
+module.exports = thinkF([{
     url: 'http://movie.douban.com/nowplaying/hangzhou/',
     parse: parseDoubanMovie
 }], getServerMovie);
