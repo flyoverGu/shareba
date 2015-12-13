@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影排行榜</title>
+    <link rel="stylesheet" href="./movie/index.css">
+</head>
+<body>
+    <div class="header">
+        <h2>电影排行榜</h2>
+    </div>
+    <div class="main">
+        <ul class="movie-list">
+            <% for (var i = 0; i < movie.length; i++) {%>
+            <li class="item">
+                <img src="<%= movie[i].imgUrl %>" alt="">
+                <span class="title"><%= movie[i].title %></span>
+                <span class="score"><%= movie[i].score %></span>
+            </li>
+            <%}%>
+        </ul>
+    </div>
+</body>
+</html>

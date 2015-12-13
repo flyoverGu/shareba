@@ -4,6 +4,7 @@
 let http = require('superagent');
 let $ = require('cheerio');
 let co = require('co');
+let db = require('./db');
 
 // 网络获取
 let getServerMovie = (url, parse) => new Promise((resolve, reject) =>
@@ -12,12 +13,20 @@ let getServerMovie = (url, parse) => new Promise((resolve, reject) =>
 
 // 豆瓣电影解析器
 let parseDoubanMovie = (html) => {
+    console.log('开始解析html');
     const $el = $.load(html, {
         decodeEntities: false
     });
     const $list = $el('#nowplaying ul.lists>li');
-    const res = $list.map((index, li) => {
-        return li.attribs;
+    // FIXME
+    let res = [];
+    $list.map((index, li) => {
+        res.push({
+            title: $(li).data('title'),
+            score: $(li).data('score'),
+            doubanUrl: $(li).find('.ticket-btn').attr('href'),
+            imgUrl: $(li).find('img').attr('src')
+        });
     });
     return res
 }
@@ -30,7 +39,7 @@ let start = (list, ser, cb) => {
 
 let thinkF = (list, ser) => (cb) => start(list, ser, cb);
 
-module.exports = thinkF([{
+thinkF([{
     url: 'http://movie.douban.com/nowplaying/hangzhou/',
     parse: parseDoubanMovie
-}], getServerMovie);
+}], getServerMovie)((err, val) => db.saveData(val));
