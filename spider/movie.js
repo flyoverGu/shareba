@@ -8,7 +8,7 @@ let db = require('./db');
 
 // 网络获取
 let getServerMovie = (url, parse) => new Promise((resolve, reject) =>
-    http.get(url).end((err, res) => err ? reject(err) : resolve(parse(res.text)))
+    http.get(url).set('user-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36').set('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8').end((err, res) => err ? reject(err) : resolve(parse(res.text)))
 );
 
 // 定义解析器
@@ -34,7 +34,7 @@ let parseMeituanMovie = (html) => {
 }
 
 let parseTaobaoMoive = (html) => {
-    return commonParse(html, '.center-wrap .tab-content>.tab-movie-list .movie-card-warp', (el, res) => res.push({
+    return commonParse(html, '.center-wrap .tab-content>.tab-movie-list .movie-card-wrap', (el, res) => res.push({
         id: 'taobao',
         title: $(el).find('.movie-card-name .bt-l').html(),
         score: $(el).find('.movie-card-name .bt-r').html()
