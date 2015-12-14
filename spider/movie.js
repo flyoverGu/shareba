@@ -14,25 +14,47 @@ let getServerMovie = (url, parse) => new Promise((resolve, reject) =>
 // 定义解析器
 // 豆瓣电影解析器
 let parseDoubanMovie = (html) => {
+    return commonParse(html, '#nowplaying ul.lists>li', (el, res) => res.push({
+        id: 'douban',
+        title: $(el).data('title'),
+        count: $(el).data('votecount'),
+        score: $(el).data('score'),
+        doubanUrl: $(el).find('.ticket-btn').attr('href'),
+        imgUrl: $(el).find('img').attr('src')
+    }));
+}
+
+// 美团解析器
+let parseMeituanMovie = (html) => {
+    return commonParse(html, '.movies-container .movie-cell', (el, res) => res.push({
+        id: 'meituan',
+        title: $(el).find('.movie-cell__cover').attr('title'),
+        score: parseInt($(el).find('.rate-stars').attr('style').replace('width:', '')) / 10
+    }));
+}
+
+let parseTaobaoMoive = (html) => {
+    return commonParse(html, '.center-wrap .tab-content>.tab-movie-list .movie-card-warp', (el, res) => res.push({
+        id: 'taobao',
+        title: $(el).find('.movie-card-name .bt-l').html(),
+        score: $(el).find('.movie-card-name .bt-r').html()
+    }));
+}
+
+let commonParse = (html, selector, dataFun) => {
     console.log('开始解析html');
     const $el = $.load(html, {
         decodeEntities: false
     });
-    const $list = $el('#nowplaying ul.lists>li');
+    const $list = $el(selector);
     // FIXME
     let res = [];
     $list.map((index, li) => {
-        res.push({
-            id: 'douban',
-            title: $(li).data('title'),
-            count: $(li).data('votecount'),
-            score: $(li).data('score'),
-            doubanUrl: $(li).find('.ticket-btn').attr('href'),
-            imgUrl: $(li).find('img').attr('src')
-        });
+        dataFun(li, res);
     });
     return res
 }
+
 
 let start = (list, ser, cb) => {
     co(function*() {
@@ -47,9 +69,16 @@ let handleData = (val) => {
 
 let thinkF = (list, ser) => (cb) => start(list, ser, cb);
 
-
-// 对外启动接口
-module.exports = () => thinkF([{
+const spiderList = [{
+    url: 'https://dianying.taobao.com/showList.htm',
+    parse: parseTaobaoMoive
+}, {
     url: 'http://movie.douban.com/nowplaying/hangzhou/',
     parse: parseDoubanMovie
-}], getServerMovie)((err, val) => handleData(val));
+}, {
+    url: 'http://hz.meituan.com/dianying/zuixindianying',
+    parse: parseMeituanMovie
+}]
+
+// 对外启动接口
+module.exports = () => thinkF(spiderList, getServerMovie)((err, val) => handleData(val));

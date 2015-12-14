@@ -9,3 +9,4 @@ let start = () => {
 }
 
 setInterval(() => start(), time);
+movie();
