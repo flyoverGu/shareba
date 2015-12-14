@@ -11,6 +11,7 @@ let getServerMovie = (url, parse) => new Promise((resolve, reject) =>
     http.get(url).end((err, res) => err ? reject(err) : resolve(parse(res.text)))
 );
 
+// 定义解析器
 // 豆瓣电影解析器
 let parseDoubanMovie = (html) => {
     console.log('开始解析html');
@@ -22,7 +23,9 @@ let parseDoubanMovie = (html) => {
     let res = [];
     $list.map((index, li) => {
         res.push({
+            id: 'douban',
             title: $(li).data('title'),
+            count: $(li).data('votecount'),
             score: $(li).data('score'),
             doubanUrl: $(li).find('.ticket-btn').attr('href'),
             imgUrl: $(li).find('img').attr('src')
@@ -37,9 +40,16 @@ let start = (list, ser, cb) => {
     }).then((val) => cb(null, val), (err) => cb(err));
 }
 
+let handleData = (val) => {
+    // FIXME db是从外面引入
+    db.saveData(val);
+}
+
 let thinkF = (list, ser) => (cb) => start(list, ser, cb);
 
-thinkF([{
+
+// 对外启动接口
+module.exports = () => thinkF([{
     url: 'http://movie.douban.com/nowplaying/hangzhou/',
     parse: parseDoubanMovie
-}], getServerMovie)((err, val) => db.saveData(val));
+}], getServerMovie)((err, val) => handleData(val));
