@@ -74,14 +74,14 @@ const spiderList = {
         url: 'https://dianying.taobao.com/showList.htm',
         parse: parseTaobaoMoive
     },
-    //'douban': {
-    //    url: 'http://movie.douban.com/nowplaying/hangzhou/',
-    //    parse: parseDoubanMovie
-    //},
-    //'meituan': {
-    //    url: 'http://hz.meituan.com/dianying/zuixindianying',
-    //    parse: parseMeituanMovie
-    //}
+    'douban': {
+        url: 'http://movie.douban.com/nowplaying/hangzhou/',
+        parse: parseDoubanMovie
+    },
+    'meituan': {
+        url: 'http://hz.meituan.com/dianying/zuixindianying',
+        parse: parseMeituanMovie
+    }
 }
 
 // 对外启动接口
