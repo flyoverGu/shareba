@@ -36,7 +36,7 @@ let parseTaobaoMoive = (html) => {
     return commonParse(html, '.center-wrap .tab-content>.tab-movie-list .movie-card-wrap', (el, res) => {
         res.push({
             title: $(el).find('.movie-card-name .bt-l')[0].children[0].data,
-            score: $(el).find('.movie-card-name .bt-r').html()
+            score: Number($(el).find('.movie-card-name .bt-r').html()) || 0
         })
     });
 }

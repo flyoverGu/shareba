@@ -1,3 +1,4 @@
+'use strict';
 var route = require('koa-route');
 var db = require('../spider/db');
 var _ = require('underscore');
@@ -8,29 +9,57 @@ module.exports = function(app) {
 
         // 统计各站分数
         let t = {};
-        movie['douban'].each(function(i) {
-            t[i.title] = t[i.title] || {};
-            _.extend(t[i.title], {
-                title: i.title,
-                dbScore: i.score,
-            });
-        });
-
         _.map(movie, (item, index) => {
             item.map((m) => {
                 t[m.title] = _.extend(t[m.title] || {}, {
-                    title: item.tltle,
-                    index + 'Score': item.score
+                    title: m.title,
+                    [index + 'Score']: m.score || 0,
                 });
+
+                if (index === 'douban') {
+                    t[m.title] = _.extend(t[m.title], {
+                        count: m.count,
+                        imgUrl: m.imgUrl
+                    });
+                }
             });
         });
 
-        console.log(t);
+        let result = [];
+        _.map(t, (item, index) => {
+            // 拿豆瓣当准则
+            if (!item.doubanScore) return;
+            const dbP = getPercent(item.count);
+            item['allScore'] = dbP * item.doubanScore + getPartScore(1 - dbP, item.taobaoScore, item.meituanScore)
+            result.push(item);
+        });
 
-        this.body = JSON.stringify(t);
+        // sort
+        result.sort(function(a, b) {
+            return b.allScore - a.allScore;
+        });
 
-        //yield this.render('movie', {
-        //    movie
-        //});
+        this.body = JSON.stringify(result);
+
+        yield this.render('movie', {
+            movie: result
+        });
     }));
+}
+
+let getPercent = (count) => {
+    if (count > 50000) return 1;
+    return 0.3 + (0.5 / 50000) * count;
+}
+
+let getPartScore = (p, s1, s2) => {
+    s1 = s1 || 0;
+    s2 = s2 || 0;
+    s1 *= p;
+    s2 *= p;
+    if (s1 && s2) {
+        return (s1 + s2) / 2;
+    } else {
+        return s1 + s2;
+    }
 }

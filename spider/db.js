@@ -17,7 +17,7 @@ let getData = () => {
     const path = './spider/db/movie.js';
     try {
         const mStr = fs.readFileSync(path, 'utf8');
-        return JSON.parse(mStr)[0];
+        return JSON.parse(mStr);
     } catch(e) {
         console.log(e);
         return [];
