@@ -55,6 +55,9 @@
 	__webpack_require__(2);
 
 
+
+
+
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
@@ -90,7 +93,7 @@
 
 
 	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nfont,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-weight: inherit;\n  font-style: inherit;\n  font-size: 100%;\n  font-family: inherit;\n  vertical-align: baseline; }\n\n/* remember to define focus styles! */\n:focus {\n  outline: 0; }\n\nbody {\n  line-height: 1;\n  color: black;\n  background: white; }\n\nol,\nul {\n  list-style: none; }\n\n/* tables still need 'cellspacing=\"0\"' in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\ncaption,\nth,\ntd {\n  text-align: left;\n  font-weight: normal; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\"; }\n\nblockquote,\nq {\n  quotes: \"\" \"\"; }\n\nbody {\n  margin: 10px 40px 10px 40px; }\n\n.header {\n  text-align: center;\n  font-size: 30px;\n  padding-top: 20px;\n  padding-bottom: 20px; }\n\n.main {\n  width: 460px;\n  margin: auto; }\n\n.item {\n  padding: 10px; }\n\n.item span {\n  display: inline-block;\n  padding: 0 20px; }\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nfont,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-weight: inherit;\n  font-style: inherit;\n  font-size: 100%;\n  font-family: inherit;\n  vertical-align: baseline; }\n\n/* remember to define focus styles! */\n:focus {\n  outline: 0; }\n\nbody {\n  line-height: 1;\n  color: black;\n  background: white; }\n\nol,\nul {\n  list-style: none; }\n\n/* tables still need 'cellspacing=\"0\"' in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\ncaption,\nth,\ntd {\n  text-align: left;\n  font-weight: normal; }\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\"; }\n\nblockquote,\nq {\n  quotes: \"\" \"\"; }\n\nbody {\n  margin: 10px 40px 10px 40px; }\n\n.header {\n  text-align: center;\n  font-size: 30px;\n  padding-top: 20px;\n  padding-bottom: 20px; }\n\n.main {\n  margin: 0 200px; }\n\n.item {\n  padding: 10px; }\n  .item span {\n    display: inline-block;\n    padding: 0 20px; }\n  .item img {\n    width: 80px; }\n", ""]);
 
 	// exports
 

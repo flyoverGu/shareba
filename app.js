@@ -14,7 +14,7 @@ var exception = require('./lib/exception');
 
 
 // start spider;
-//require('./spider');
+require('./spider');
 
 var app = koa();
 app.keys = config.keys;

@@ -10,6 +10,14 @@
     </div>
     <div class="main">
         <ul class="movie-list">
+            <li class="item">
+                <span class="title"> </span>
+                <span class="title">Title</span>
+                <span class="score">总评分</span>
+                <span class="score">豆瓣评分</span>
+                <span class="score">淘宝评分</span>
+                <span class="score">美团评分</span>
+            </li>
             <% for (var i = 0; i < movie.length; i++) {%>
             <li class="item">
                 <img src="<%= movie[i].imgUrl %>" alt="">
