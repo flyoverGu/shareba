@@ -2,8 +2,18 @@
 var route = require('koa-route');
 var db = require('../spider/db');
 var _ = require('underscore');
+var upload = require('../service/upload');
 
 module.exports = function(app) {
+    app.use(route.get('/api/upload/token', function*() {
+        this.body = {
+            token: upload(),
+            code: 1
+        };
+    }));
+    app.use(route.get('/upload', function*() {
+        yield this.render('upload');
+    }));
     app.use(route.get('/movie', function*() {
         const movie = db.getData();
 
