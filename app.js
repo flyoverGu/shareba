@@ -14,7 +14,9 @@ var exception = require('./lib/exception');
 
 
 // start spider;
-require('./spider');
+if (process.env.NODE_ENV === 'production') {
+    require('./spider');
+}
 
 var app = koa();
 app.keys = config.keys;
