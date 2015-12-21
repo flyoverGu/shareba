@@ -2,7 +2,6 @@
   "apps" : [{
     "name"        : "shareba",
     "script"      : "app.js",
-    "watch"       : "true",
     "exec_interpreter": "babel-node",
     "node_args"   : "--harmony",
     "env": {
