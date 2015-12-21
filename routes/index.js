@@ -30,7 +30,7 @@ module.exports = function(app) {
             // 拿豆瓣当准则
             if (!item.doubanScore) return;
             const dbP = getPercent(item.count);
-            item['allScore'] = dbP * item.doubanScore + getPartScore(1 - dbP, item.taobaoScore, item.meituanScore)
+            item['allScore'] = Math.round((dbP * item.doubanScore + getPartScore(1 - dbP, item.taobaoScore, item.meituanScore)) * 10) / 10;
             result.push(item);
         });
 

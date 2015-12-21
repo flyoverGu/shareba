@@ -113,17 +113,30 @@ body {
     
 }
 .main {
-    margin: 0 200px;
+    margin: auto;
+    width: 650px;
 }
 
 .item {
     padding: 10px;
+    position: relative;
     span {
         display: inline-block;
         padding: 0 20px;
+        width: 65px;
     }
     img {
         width: 80px;
+    }
+
+    &:first-child {
+        padding-left: 76px;
+    }
+
+    .score {
+        display: inline-block;
+        position: absolute;
+        top: 38%;
     }
 }
 

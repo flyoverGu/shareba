@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>电影排行榜</title>
 </head>
+
 <body>
     <div class="header">
         <h2>电影排行榜</h2>
@@ -11,25 +13,27 @@
     <div class="main">
         <ul class="movie-list">
             <li class="item">
-                <span class="title"> </span>
-                <span class="title">Title</span>
-                <span class="score">总评分</span>
-                <span class="score">豆瓣评分</span>
-                <span class="score">淘宝评分</span>
-                <span class="score">美团评分</span>
+                <span>Title</span>
+                <span>总评分</span>
+                <span>豆瓣评分</span>
+                <span>淘宝评分</span>
+                <span>美团评分</span>
             </li>
-            <% for (var i = 0; i < movie.length; i++) {%>
-            <li class="item">
-                <img src="<%= movie[i].imgUrl %>" alt="">
-                <span class="title"><%= movie[i].title %></span>
-                <span class="score"><%= movie[i].allScore %></span>
-                <span class="score"><%= movie[i].doubanScore %></span>
-                <span class="score"><%= movie[i].taobaoScore %></span>
-                <span class="score"><%= movie[i].meituanScore %></span>
-            </li>
-            <%}%>
+            <% for (var i=0 ; i < movie.length; i++) {%>
+                <li class="item">
+                    <img src="<%= movie[i].imgUrl %>" alt="">
+                    <div class="score">
+                        <span><%= movie[i].title %></span>
+                        <span><%= movie[i].allScore %></span>
+                        <span><%= movie[i].doubanScore || 0 %></span>
+                        <span><%= movie[i].taobaoScore || 0 %></span>
+                        <span><%= movie[i].meituanScore || 0 %></span>
+                    </div>
+                </li>
+                <%}%>
         </ul>
     </div>
     <script src="./movie/bundle.js"></script>
 </body>
+
 </html>
