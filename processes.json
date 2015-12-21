@@ -6,7 +6,8 @@
     "node_args"   : "--harmony",
     "env": {
         "PORT": 8080,
-        "DEBUG": "*"
+        "DEBUG": "*",
+        "NODE_ENV": "production"
     }
   }]
 }
