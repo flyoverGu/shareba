@@ -48,7 +48,7 @@
 	    context: __dirname + '/public/',
 	    entry: {
 	        'movie/bundle': './movie/index.js',
-	        'pic_bed/bundle': './movie/index.js'
+	        'pic/bundle': './movie/index.js'
 	    },
 	    output: {
 	        path: __dirname + '/public/',
