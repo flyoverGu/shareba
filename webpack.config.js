@@ -1,9 +1,12 @@
 module.exports = {
-    context: __dirname + '/public/movie',
-    entry: './index.js',
+    context: __dirname + '/public/',
+    entry: {
+        'movie/bundle': './movie/index.js',
+        'pic_bed/bundle': './movie/index.js'
+    },
     output: {
-        path: __dirname + '/public/movie',
-        filename: 'bundle.js'
+        path: __dirname + '/public/',
+        filename: '[name].js'
     },
     module: {
         loaders: [{

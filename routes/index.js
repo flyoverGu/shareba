@@ -11,8 +11,8 @@ module.exports = function(app) {
             code: 1
         };
     }));
-    app.use(route.get('/upload', function*() {
-        yield this.render('upload');
+    app.use(route.get('/pic_bed', function*() {
+        yield this.render('pic_bed');
     }));
     app.use(route.get('/movie', function*() {
         const movie = db.getData();
