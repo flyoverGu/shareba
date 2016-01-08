@@ -5,6 +5,10 @@ var _ = require('underscore');
 var upload = require('../service/upload');
 
 module.exports = function(app) {
+    app.use(route.get('/pub/api/v1/login/', function*() {
+        this.body = 'ok';
+    }));
+
     app.use(route.get('/api/upload/token', function*() {
         this.body = {
             token: upload(),
